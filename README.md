@@ -1,6 +1,7 @@
 <div align="center">
 
 # SlimBrave
+
 <img src="https://github.com/user-attachments/assets/3e90a996-a74a-4ca1-bea6-0869275bab58" width="200" height="300">
 </div>
 
@@ -79,97 +80,119 @@ SlimBrave is a powerful PowerShell script designed for Windows users to streamli
    Forces PDFs to open in external applications.
 
 - **Disable Brave Shields**  
-   Turns off Brave's built-in Shields protection.
+ Turns off Brave's built-in Shields protection.
 </details>
-
----
-
-# How to Run
-
-### Run the command below in PowerShell:
-
-```ps1
-iwr "https://raw.githubusercontent.com/ltx0101/SlimBrave/main/SlimBrave.ps1" -OutFile "SlimBrave.ps1"; .\SlimBrave.ps1
-```
-
----
-
-## Extras:
 
 <details>
 <summary> Presets </summary>
 
+- **Maximum Privacy Preset**
+  - Telemetry: Blocks all reporting (metrics, safe browsing, URL collection, feedback).
+  - Privacy: Disables autofill, password manager, sign-in, WebRTC leaks, QUIC, and forces Do Not Track.
+  - Brave Features: Kills Rewards, Wallet, VPN, AI Chat, Tor, and Sync.
+  - Performance: Disables background processes, recommendations, and bloat.
+  - DNS: Uses plain DNS (no HTTPS) to prevent potential logging by DoH providers.
+  - Best for: Paranoid users, journalists, activists, or anyone who wants Brave as private as possible.
 
-- **Maximum Privacy Preset**  
-   - Telemetry: Blocks all reporting (metrics, safe browsing, URL collection, feedback).
-   - Privacy: Disables autofill, password manager, sign-in, WebRTC leaks, QUIC, and forces Do Not Track.
-   - Brave Features: Kills Rewards, Wallet, VPN, AI Chat, Tor, and Sync.
-   - Performance: Disables background processes, recommendations, and bloat.
-   - DNS: Uses plain DNS (no HTTPS) to prevent potential logging by DoH providers.
-   - Best for: Paranoid users, journalists, activists, or anyone who wants Brave as private as possible.
+- **Balanced Privacy Preset**
+  - Telemetry: Blocks all tracking but keeps basic safe browsing.
+  - Privacy: Blocks third-party cookies, enables Do Not Track, but allows password manager and autofill for addresses.
+  - Brave Features: Disables Rewards, Wallet, VPN, and AI features.
+  - Performance: Turns off background services and ads.
+  - DNS: Uses automatic DoH (lets Brave choose the fastest secure DNS).
+  - Best for: Most users who want privacy but still need convenience features.
 
-- **Balanced Privacy Preset**  
-   - Telemetry: Blocks all tracking but keeps basic safe browsing.
-   - Privacy: Blocks third-party cookies, enables Do Not Track, but allows password manager and autofill for addresses.
-   - Brave Features: Disables Rewards, Wallet, VPN, and AI features.
-   - Performance: Turns off background services and ads.
-   - DNS: Uses automatic DoH (lets Brave choose the fastest secure DNS).
-   - Best for: Most users who want privacy but still need convenience features.
+- **Performance Focused Preset**
+  - Telemetry: Only blocks metrics and feedback surveys (keeps some safe browsing).
+  - Brave Features: Disables Rewards, Wallet, VPN, and AI to declutter the browser.
+  - Performance: Kills background processes, shopping features, and promotions.
+  - DNS: Automatic DoH for a balance of speed and security.
+  - Best for: Users who want a faster, cleaner Brave without extreme privacy tweaks.
 
-- **Performance Focused Preset**  
-   - Telemetry: Only blocks metrics and feedback surveys (keeps some safe browsing).
-   - Brave Features: Disables Rewards, Wallet, VPN, and AI to declutter the browser.
-   - Performance: Kills background processes, shopping features, and promotions.
-   - DNS: Automatic DoH for a balance of speed and security.
-   - Best for: Users who want a faster, cleaner Brave without extreme privacy tweaks.
+- **Developer Preset**
+  - Telemetry: Blocks all reporting.
+  - Brave Features: Disables Rewards, Wallet, and VPN but keeps developer tools.
+  - Performance: Turns off background services and ads.
+  - DNS: Automatic DoH (default secure DNS).
+  - Best for: Developers who need dev tools but still want telemetry and ads disabled.
 
-- **Developer Preset**  
-   - Telemetry: Blocks all reporting.
-   - Brave Features: Disables Rewards, Wallet, and VPN but keeps developer tools.
-   - Performance: Turns off background services and ads.
-   - DNS: Automatic DoH (default secure DNS).
-   - Best for: Developers who need dev tools but still want telemetry and ads disabled.
-
-- **Strict Parental Controls Preset**  
-   - Privacy: Blocks incognito mode, forces Google SafeSearch, and disables sign-in.
-   - Brave Features: Disables Rewards, Wallet, VPN, Tor, and dev tools.
-   - DNS: Uses custom DoH (can be set to a family-friendly DNS like Cloudflare for Families).
-   - Best for: Parents, schools, or workplaces that need restricted browsing.
-
+- **Strict Parental Controls Preset**
+  - Privacy: Blocks incognito mode, forces Google SafeSearch, and disables sign-in.
+  - Brave Features: Disables Rewards, Wallet, VPN, Tor, and dev tools.
+  - DNS: Uses custom DoH (can be set to a family-friendly DNS like Cloudflare for Families).
+  - Best for: Parents, schools, or workplaces that need restricted browsing.
 
 </details>
 
+## Windows Version
 
+**Requirements**
 
-<details>
-<summary> Requirements </summary>
-
-- Windows 10/11
+- Windows 10 / 11
 - PowerShell
 - Administrator privileges
-</details>
 
-<details>
-<summary>Error "Running Scripts is Disabled on this System"</summary>
+Run:
 
-### Run this command in PowerShell:
-
-```ps1
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+```powershell
+iwr "https://raw.githubusercontent.com/ltx0101/SlimBrave/main/SlimBrave.ps1" -OutFile "SlimBrave.ps1"; .\SlimBrave.ps1
 ```
-</details>
+
+If you receive:
+
+`"Running scripts is disabled on this system"`
+
+Run:
+
+`Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
+
+## Linux Version
+
+SlimBrave now supports Linux using Brave’s managed policy directory:
+
+/etc/brave/policies/managed/slimbrave.json
+
+**Requirements**
+
+- Bash
+
+- sudo / root access
+
+- jq (only required for importing settings)
+
+Run:
+
+```bash
+curl -O https://raw.githubusercontent.com/ltx0101/SlimBrave/main/SlimBrave.sh
+sudo bash SlimBrave.sh
+```
+
+Or make executable:
+
+```
+chmod +x SlimBrave.sh
+sudo ./SlimBrave.sh
+```
+
+> **Note: Must be run as root.**
+
+Restart Brave after applying changes.
+
+Uses official enterprise-style policies (cleaner than modifying user profiles).
+
 <div align="center">
   
 ---
 
 🌟 **Like this project? Give it a star!** 🌟  
-💻  **Want to contribute? PRs are welcome!** 💻 
+💻 **Want to contribute? PRs are welcome!** 💻
 
 </div>
 
 ### Why SlimBrave Matters
 
 In an era of increasingly bloated browsers, SlimBrave puts **you** back in control:
+
 - 🚀 **Faster browsing** by removing unnecessary features
 - 🛡️ **Enhanced privacy** through granular controls
 - ⚙️ **Transparent customization** without hidden settings
@@ -177,11 +200,13 @@ In an era of increasingly bloated browsers, SlimBrave puts **you** back in contr
 ---
 
 ### Future Roadmap
+
 - [x] Add preset configurations (Privacy, Performance, etc.)
 - [x] Create backup/restore functionality
-- [ ] Add support for Linux/Mac (WIP)
+- [x] Add support for Linux/Mac
 
 ---
+
 <div align="center">
    
 [![PayPal Donate](https://img.shields.io/badge/PayPal_Donate-s?style=for-the-badge&logo=paypal&logoColor=black)](https://paypal.me/AggelosMeta)
@@ -190,6 +215,6 @@ In an era of increasingly bloated browsers, SlimBrave puts **you** back in contr
 
 <div align="center">
   
-Made with ❤️ and PowerShell  
+Made with ❤️ and PowerShell
 
 </div>
